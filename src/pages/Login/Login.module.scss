@@ -1,0 +1,89 @@
+@use "../../scss/colors";
+
+.Login {
+    padding-top: 50px;
+    color: white;
+    background-color: colors.$primary-bg;
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .hero {
+        display: flex;
+        justify-content: space-between;
+        padding-right: 250px;
+
+        .planets {
+            width: 800px;
+            justify-self: flex-end;
+            display: flex;
+        }
+
+        .formField {
+            display: flex;
+            flex-direction: column;
+            width: 380px;
+
+            h2 {
+                margin-bottom: 10px;
+            }
+
+            .message {
+                font-size: 20px;
+                font-weight: 300;
+                margin-bottom: 15px;
+            }
+
+            .textField {
+                font-size: 16px;
+                box-sizing: border-box;
+                padding-left: 20px;
+                margin-bottom: 20px;
+                min-width: 380px;
+                height: 42px;
+                border-radius: 2px;
+                outline: none;
+                border: 2px solid #eaeaea;
+                transition: border-color 0.2s ease-in-out;
+
+                &:hover {
+                    border: 2px solid rgba($color: #000000, $alpha: 0.55);
+                }
+                &:focus {
+                    border: 2px solid #579ddf;
+                }
+            }
+
+            button {
+                width: 380px;
+                height: 42px;
+                color: white;
+                background-color: colors.$primary;
+                border: none;
+                border-radius: 2px;
+                font-size: 16px;
+                font-weight: 800;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #d36c18;
+                }
+            }
+
+            .errorDiv {
+                color: colors.$error;
+                display: flex;
+                align-items: center;
+                margin-top: 20px;
+                visibility: hidden;
+
+                div {
+                    margin-left: 10px;
+                    font-size: 20px;
+                    font-weight: 300;
+                }
+            }
+        }
+    }
+}
