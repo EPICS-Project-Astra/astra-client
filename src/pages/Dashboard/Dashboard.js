@@ -3,10 +3,11 @@ import store from "../../store";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import rocket from "../../assets/icons/rocket.svg";
+import classes from "./Dashboard.module.scss";
+import DashboardNavbar from "../../components/DashboardNavbar/DashboardNavbar";
 
 const Dashboard = (props) => {
-    document.body.style = "background: #254360;";
+    document.body.style = "background: #FAFAFA;";
     const navigate = useNavigate();
     const logOut = () => {
         store.dispatch(logoutUser());
@@ -14,11 +15,20 @@ const Dashboard = (props) => {
     };
 
     return (
-        <div>
-            <img src={rocket} alt="rocket" />
-            <span>Username: {props.auth.user?.name}</span>
-            <button onClick={logOut}>Log Out</button>
-        </div>
+        <>
+            <DashboardNavbar logout={logOut} />
+            <div className={classes.dashboard}>
+                <div className={classes.sidebarWrapper}>
+                    {/* insert component here */}
+                </div>
+                <div className={classes.postsWrapper}>
+                    {/* insert component here */}
+                </div>
+                <div className={classes.rightSideWrapper}>
+                    {/* insert component here */}
+                </div>
+            </div>
+        </>
     );
 };
 

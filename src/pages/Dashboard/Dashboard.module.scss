@@ -1,0 +1,22 @@
+.dashboard {
+    display: flex;
+    height: calc(100vh - 65px);
+
+    .sidebarWrapper {
+        display: flex;
+        flex: 2;
+        border: 1px solid black;
+    }
+
+    .postsWrapper {
+        display: flex;
+        flex: 4.5;
+        border: 1px solid black;
+    }
+
+    .rightSideWrapper {
+        display: flex;
+        flex: 2;
+        border: 1px solid black;
+    }
+}

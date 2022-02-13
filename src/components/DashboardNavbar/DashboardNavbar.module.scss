@@ -1,0 +1,15 @@
+@use "../../scss/colors";
+
+.DashboardNavbar {
+    display: flex;
+    height: 65px;
+    background-color: colors.$primary-bg;
+    justify-content: end;
+    align-items: center;
+    padding: 5px 10px;
+    box-sizing: border-box;
+
+    .logout {
+        height: 30px;
+    }
+}

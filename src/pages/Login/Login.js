@@ -10,6 +10,7 @@ import { loginUser } from "../../actions/auth";
 import PropTypes from "prop-types";
 
 const Login = (props) => {
+    document.body.style = "background: #254360;";
     const name = useRef(null);
     const password = useRef(null);
 
@@ -24,7 +25,6 @@ const Login = (props) => {
         if (props.isAuthenticated) {
             return navigate("/dashboard");
         }
-        document.body.style = "background: #254360;";
     }, [props.isAuthenticated]);
 
     return (

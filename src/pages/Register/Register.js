@@ -13,6 +13,7 @@ import PropTypes from "prop-types";
 import { registerUser } from "../../actions/auth";
 
 const Register = (props) => {
+    document.body.style = "background: #254360;";
     const name = useRef(null);
     const email = useRef(null);
     const password = useRef(null);
@@ -38,7 +39,6 @@ const Register = (props) => {
         if (props.isAuthenticated) {
             return navigate("/dashboard");
         }
-        document.body.style = "background: #254360;";
     }, [props.isAuthenticated]);
 
     return (
