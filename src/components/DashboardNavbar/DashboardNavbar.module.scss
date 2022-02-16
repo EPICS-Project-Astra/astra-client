@@ -4,10 +4,76 @@
     display: flex;
     height: 65px;
     background-color: colors.$primary-bg;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
-    padding: 5px 10px;
+    padding: 5px 30px;
     box-sizing: border-box;
+
+    .rightSide {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-width: 200px;
+
+        // .createPost {
+        //     display: flex;
+        //     align-items: center;
+        //     height: 45px;
+        //     color: white;
+        //     background-color: colors.$primary;
+        //     border: none;
+        //     border-radius: 2px;
+        //     padding: 11px 15px;
+        //     font-size: 14px;
+        //     font-weight: 900;
+        //     cursor: pointer;
+        //     text-decoration: none;
+
+        //     .icon {
+        //         height: 20px;
+        //         margin-right: 5px;
+        //     }
+        //     &:hover {
+        //         background: #d36c18;
+        //     }
+        // }
+        .iconButtons {
+            display: flex;
+            width: 100px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .createPost,
+        .astracoins,
+        .notifications,
+        .avatar {
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+        .createPost,
+        .astracoins {
+            // color: white;
+            transition: filter 300ms;
+            border-radius: 5px;
+            background-color: colors.$primary-bg;
+            height: 40px;
+            width: 40px;
+            &:hover {
+                filter: brightness(1.2);
+            }
+        }
+
+        .createPost {
+            color: white;
+        }
+        .chevronDown {
+            height: 15px;
+            color: colors.$grey;
+        }
+    }
 
     .logout {
         height: 30px;

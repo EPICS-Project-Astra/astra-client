@@ -1,0 +1,62 @@
+@use "../../scss/colors";
+
+.post {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 650px;
+    height: 630px;
+    padding: 10px 20px;
+    border: 1px solid bisque;
+    border-radius: 3px;
+
+    .top {
+        display: flex;
+        align-items: center;
+        height: 50px;
+        width: 100%;
+
+        .avatar {
+            display: flex;
+            height: 45px;
+            width: 45px;
+        }
+
+        .user {
+            display: flex;
+            flex-direction: column;
+            margin-left: 10px;
+            .name {
+                font-weight: 500;
+            }
+
+            .time {
+                color: colors.$grey;
+                font-size: 14px;
+            }
+        }
+    }
+
+    .description {
+        margin-top: 10px;
+    }
+
+    .image {
+        margin-top: 10px;
+    }
+
+    .interaction {
+        display: flex;
+        color: colors.$grey;
+
+        .like {
+            display: flex;
+        }
+
+        .comment {
+        }
+
+        .astracoin {
+        }
+    }
+}
