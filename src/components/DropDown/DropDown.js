@@ -41,7 +41,7 @@ const DropDown = (props) => {
     ) : (
         <div className={classes.dropdown}>
             <DropDownItem icon={<User />} description={"Profile"}>
-                <span>{props.user?.name}</span>
+                <span>{props.user?.username}</span>
             </DropDownItem>
             <DropDownItem icon={<Settings />}>
                 <span>Settings</span>

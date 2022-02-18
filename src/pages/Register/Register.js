@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { showAlert } from "../../actions/alert";
 import PropTypes from "prop-types";
 import { registerUser } from "../../actions/auth";
+import { v4 } from "uuid";
 
 const Register = (props) => {
     document.body.style = "background: #254360;";
@@ -28,9 +29,10 @@ const Register = (props) => {
             props.showAlert("Passwords do not match.", "danger");
         } else {
             props.registerUser({
-                name: name.current.value,
-                email: email.current.value,
+                username: name.current.value,
+                // email: email.current.value,
                 password: password.current.value,
+                wallet: v4(),
             });
         }
     };

@@ -2,9 +2,9 @@ import { Bell, ChevronDown, Plus, PlusCircle } from "react-feather";
 import Logo from "../Logo/Logo";
 import classes from "./DashboardNavbar.module.scss";
 import { ReactComponent as Astra } from "../../assets/icons/rocket.svg";
-import Avatar from "../../assets/icons/avatar.svg";
 import DropDown from "../DropDown/DropDown";
 import DropDownLink from "../DropDownLink/DropDownLink";
+import Avatar from "../Avatar/Avatar";
 
 const DashboardNavbar = () => {
     return (
@@ -23,7 +23,7 @@ const DashboardNavbar = () => {
                     className={classes.avatar}
                     DropDown={<DropDown />}
                 >
-                    <img src={Avatar} alt="Avatar" />
+                    <Avatar size={40} />
                     <ChevronDown className={classes.chevronDown} />
                 </DropDownLink>
             </div>

@@ -1,0 +1,82 @@
+@use "../../scss/colors";
+
+.title {
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.description {
+    margin-top: 5px;
+}
+
+.image {
+    margin-top: 10px;
+}
+
+.interaction {
+    display: flex;
+    color: colors.$grey;
+    width: 450px;
+    max-width: 470px;
+    justify-content: space-between;
+
+    .liked,
+    .disliked {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        span {
+            display: flex;
+            align-items: center;
+            margin-left: 8px;
+        }
+    }
+
+    .disliked {
+        color: colors.$grey;
+        &:hover {
+            color: colors.$pink;
+        }
+    }
+
+    .liked {
+        color: colors.$pink;
+        &:hover {
+            color: colors.$grey;
+        }
+    }
+
+    .comment {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        color: colors.$grey;
+        text-decoration: none;
+        span {
+            display: flex;
+            align-items: center;
+            margin-left: 8px;
+        }
+
+        &:hover {
+            color: colors.$green;
+        }
+    }
+
+    .astracoin {
+        display: flex;
+        fill: colors.$grey;
+        align-items: center;
+        cursor: pointer;
+        span {
+            display: flex;
+            align-items: center;
+            margin-left: 8px;
+        }
+
+        &:hover {
+            color: colors.$primary;
+            fill: colors.$primary;
+        }
+    }
+}
