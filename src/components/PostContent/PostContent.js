@@ -5,23 +5,22 @@ import classes from "./PostContent.module.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import User from "../User/User";
+import { connect } from "react-redux";
+import { deletePost, likePost, unlikePost } from "../../actions/post";
+import PropTypes from "prop-types";
 
 const PostContent = (props) => {
-    const [isLiked, setIsLiked] = useState(false);
+    const [isLiked, setIsLiked] = useState(
+        props.post.likes.filter((item) => {
+            return item.user === props.auth.user._id;
+        }).length > 0
+    );
 
     return (
         <div className={props.className}>
             <User />
-            <div className={classes.title}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </div>
-            <div className={classes.description}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Quibusdam sapiente accusantium minus temporibus atque rem amet
-                dolorem eveniet ratione tempora, enim nesciunt, consequatur quos
-                possimus earum quod molestiae incidunt voluptatem reprehenderit
-                mollitia necessitatibus id? Reprehenderit!
-            </div>
+            <div className={classes.title}>{props.post.title}</div>
+            <div className={classes.description}>{props.post.text}</div>
             <div className={classes.image}>
                 {props.image && <img src={bag} alt="bag" />}
             </div>
@@ -29,21 +28,53 @@ const PostContent = (props) => {
                 <div
                     className={isLiked ? classes.liked : classes.disliked}
                     onClick={() => {
-                        setIsLiked(!isLiked);
+                        setIsLiked(() => {
+                            !isLiked
+                                ? props.likePost(props.post._id)
+                                : props.unlikePost(props.post._id);
+
+                            return !isLiked;
+                        });
                     }}
                 >
                     <Heart size={20} />
-                    <span>155 likes</span>
+                    <span>{props.post.likes.length} likes</span>
                 </div>
-                <Link to="/post" className={classes.comment}>
-                    <MessageSquare size={20} /> <span>15 comments</span>
+                <Link
+                    to={"/post/" + props.post._id}
+                    className={classes.comment}
+                >
+                    <MessageSquare size={20} />{" "}
+                    <span>{props.post.comments.length} comments</span>
                 </Link>
                 <div className={classes.astracoin}>
-                    <Astra width={20} height={20} /> <span>15 astracoins</span>
+                    <Astra width={20} height={20} />{" "}
+                    <span>{props.post.coins} astracoins</span>
                 </div>
             </div>
         </div>
     );
 };
 
-export default PostContent;
+PostContent.propTypes = {
+    post: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
+    likePost: PropTypes.func.isRequired,
+    unlikePost: PropTypes.func.isRequired,
+    deletePost: PropTypes.func.isRequired,
+    showActions: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth,
+    };
+};
+
+const mapDispatchToProps = {
+    likePost: likePost,
+    unlikePost: unlikePost,
+    deletePost: deletePost,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostContent);

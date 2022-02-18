@@ -31,7 +31,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/post" element={<PostView />} />
+                <Route path="/post/:id" element={<PostView />} />
                 <Route path="/astracoin" element={<Astracoin />} />
             </Routes>
         </BrowserRouter>

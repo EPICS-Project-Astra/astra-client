@@ -7,9 +7,21 @@ import DashboardNavbar from "../../components/DashboardNavbar/DashboardNavbar";
 import Post from "../../components/Post/Post";
 import Sticky from "react-stickynode";
 import PostContent from "../../components/PostContent/PostContent";
+import { getPosts } from "../../actions/post";
+import { useEffect } from "react";
 
 const Dashboard = (props) => {
     document.body.style = "background: #FAFAFA;";
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!props.isAuthenticated) {
+            return navigate("/login");
+        }
+        props.getPosts();
+    }, []);
+
+    //redirect if not logged in
 
     return (
         <>
@@ -21,12 +33,16 @@ const Dashboard = (props) => {
                     {/* insert component here */}
                 </div>
                 <div className={classes.postsWrapper}>
-                    <Post>
-                        <PostContent image />
-                    </Post>
-                    <Post>
-                        <PostContent />
-                    </Post>
+                    {props.posts.map((post) => (
+                        <Post key={post._id}>
+                            <PostContent
+                                key={post._id}
+                                post={post}
+                                showActions={true}
+                                image
+                            />
+                        </Post>
+                    ))}
                 </div>
                 <div className={classes.rightSideWrapper}>
                     {/* insert component here */}
@@ -37,13 +53,18 @@ const Dashboard = (props) => {
 };
 
 Dashboard.propTypes = {
-    auth: PropTypes.object.isRequired,
+    posts: PropTypes.array.isRequired,
+    getPosts: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.auth,
+        posts: state.post.posts,
+        isAuthenticated: state.auth.isAuthenticated,
     };
 };
 
-export default connect(mapStateToProps, null)(Dashboard);
+const mapDispatchToProps = {
+    getPosts: getPosts,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
