@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import store from "./store";
 import { loadUser } from "./actions/auth";
 import setAuthToken from "./utils/setAuthToken";
+import Astracoin from "./pages/AstraCoin/Astracoin";
 
 function App() {
     if (localStorage.token) {
@@ -29,6 +30,8 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/astracoin" element={<Astracoin />} />
+                
             </Routes>
         </BrowserRouter>
     );
