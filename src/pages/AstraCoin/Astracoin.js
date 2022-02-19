@@ -1,6 +1,6 @@
 import classes from "./Astracoin.module.scss"
 import DashboardNavbar from "../../components/DashboardNavbar/DashboardNavbar"
-import Post from "../../components/Post/Post"
+import BuyACCon from "../../components/buyastracoin/BuyAC.js"
 const Astracoin = () => {
   return (
     <>
@@ -10,7 +10,7 @@ const Astracoin = () => {
           {/* insert component here */}
         </div>
         <div className={classes.postsWrapper}>
-          <Post />
+          <BuyACCon />
         </div>
         <div className={classes.rightSideWrapper}>
           {/* insert component here */}

@@ -16,9 +16,9 @@ const Dashboard = (props) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!props.isAuthenticated) {
-            return navigate("/login");
-        }
+        // if (!props.isAuthenticated) {
+        //     return navigate("/login");
+        // }
         props.getPosts();
     }, []);
 
