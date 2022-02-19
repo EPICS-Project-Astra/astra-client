@@ -2,12 +2,16 @@ import axios from "axios";
 import {
     GET_POSTS,
     POST_ERROR,
-    UPDATE_LIKES,
+    UPDATE_LIKES_POST,
+    UPDATE_LIKES_POSTS,
     DELETE_POST,
     ADD_POST,
-    GET_POST,
     ADD_COMMENT,
     DELETE_COMMENT,
+    GET_POST_FETCH,
+    GET_POST_SUCCESS,
+    SEND_COINS_POST,
+    SEND_COINS_POSTS,
 } from "./types";
 import { showAlert } from "./alert";
 
@@ -28,54 +32,72 @@ export const getPosts = () => async (dispatch) => {
 };
 
 //like post
-export const likePost = (post_id) => async (dispatch) => {
-    try {
-        const res = await axios.put(`/api/posts/${post_id}/likes`);
-        dispatch({
-            type: UPDATE_LIKES,
-            payload: { id: post_id, likes: res.data },
-        });
-    } catch (err) {
-        const errors = err.response.data.errors;
+export const likePost =
+    (post_id, type = "multiple") =>
+    async (dispatch) => {
+        try {
+            const res = await axios.put(`/api/posts/${post_id}/likes`);
+            type === "multiple"
+                ? dispatch({
+                      type: UPDATE_LIKES_POSTS,
+                      payload: { id: post_id, likes: res.data },
+                  })
+                : dispatch({
+                      type: UPDATE_LIKES_POST,
+                      payload: { id: post_id, likes: res.data },
+                  });
+        } catch (err) {
+            const errors = err.response.data.errors;
 
-        if (errors) {
-            errors.forEach((error) => dispatch(showAlert(error.msg, "danger")));
+            if (errors) {
+                errors.forEach((error) =>
+                    dispatch(showAlert(error.msg, "danger"))
+                );
+            }
+
+            dispatch({
+                type: POST_ERROR,
+                payload: {
+                    msg: err.response.statusText,
+                    status: err.response.status,
+                },
+            });
         }
-
-        dispatch({
-            type: POST_ERROR,
-            payload: {
-                msg: err.response.statusText,
-                status: err.response.status,
-            },
-        });
-    }
-};
+    };
 
 //unlike post
-export const unlikePost = (post_id) => async (dispatch) => {
-    try {
-        const res = await axios.put(`/api/posts/${post_id}/unlike`);
-        dispatch({
-            type: UPDATE_LIKES,
-            payload: { id: post_id, likes: res.data },
-        });
-    } catch (err) {
-        const errors = err.response.data.errors;
+export const unlikePost =
+    (post_id, type = "multiple") =>
+    async (dispatch) => {
+        try {
+            const res = await axios.put(`/api/posts/${post_id}/unlike`);
+            type === "multiple"
+                ? dispatch({
+                      type: UPDATE_LIKES_POSTS,
+                      payload: { id: post_id, likes: res.data },
+                  })
+                : dispatch({
+                      type: UPDATE_LIKES_POST,
+                      payload: { id: post_id, likes: res.data },
+                  });
+        } catch (err) {
+            const errors = err.response.data.errors;
 
-        if (errors) {
-            errors.forEach((error) => dispatch(showAlert(error.msg, "danger")));
+            if (errors) {
+                errors.forEach((error) =>
+                    dispatch(showAlert(error.msg, "danger"))
+                );
+            }
+
+            dispatch({
+                type: POST_ERROR,
+                payload: {
+                    msg: err.response.statusText,
+                    status: err.response.status,
+                },
+            });
         }
-
-        dispatch({
-            type: POST_ERROR,
-            payload: {
-                msg: err.response.statusText,
-                status: err.response.status,
-            },
-        });
-    }
-};
+    };
 //add post
 export const addPost = (formData) => async (dispatch) => {
     const config = {
@@ -109,8 +131,9 @@ export const addPost = (formData) => async (dispatch) => {
 //get post by ID
 export const getPostById = (post_id) => async (dispatch) => {
     try {
+        dispatch({ type: GET_POST_FETCH });
         const res = await axios.get(`/api/posts/${post_id}`);
-        dispatch({ type: GET_POST, payload: res.data });
+        dispatch({ type: GET_POST_SUCCESS, payload: res.data });
     } catch (err) {
         dispatch({
             type: POST_ERROR,
@@ -194,6 +217,42 @@ export const deletePost = (post_id) => async (dispatch) => {
             errors.forEach((error) => dispatch(showAlert(error.msg, "danger")));
         }
 
+        dispatch({
+            type: POST_ERROR,
+            payload: {
+                msg: err.response.statusText,
+                status: err.response.status,
+            },
+        });
+    }
+};
+
+export const sendCoins = (post_id, coins, singlePost) => async (dispatch) => {
+    try {
+        const coinsNo = parseInt(coins);
+        function isFloat(n) {
+            return coins.indexOf(".") !== -1 ? true : false;
+        }
+        if (
+            coinsNo < 0 ||
+            coinsNo === 0 ||
+            isNaN(coinsNo) ||
+            isFloat(coinsNo)
+        ) {
+            return dispatch(showAlert("Invalid coins number", "danger"));
+        }
+        const res = await axios.put("/api/posts/" + post_id + "/coins", {
+            coins: coinsNo,
+        });
+        singlePost
+            ? dispatch({ type: SEND_COINS_POST, payload: res.data })
+            : dispatch({ type: SEND_COINS_POSTS, payload: res.data });
+    } catch (err) {
+        const errors = err.response.data.errors;
+
+        if (errors) {
+            errors.forEach((error) => dispatch(showAlert(error.msg, "danger")));
+        }
         dispatch({
             type: POST_ERROR,
             payload: {

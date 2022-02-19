@@ -16,6 +16,7 @@
         "react-stickynode": "^4.0.0",
         "redux-thunk": "^2.4.1",
         "sass": "^1.49.0",
+        "timeago.js": "^4.0.2",
         "uuid": "^8.3.2",
         "web-vitals": "^2.1.0"
     },

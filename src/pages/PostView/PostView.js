@@ -1,6 +1,6 @@
 import PostContent from "../../components/PostContent/PostContent";
 import store from "../../store";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classes from "./PostView.module.scss";
@@ -8,9 +8,31 @@ import DashboardNavbar from "../../components/DashboardNavbar/DashboardNavbar";
 import Sticky from "react-stickynode";
 import Avatar from "../../components/Avatar/Avatar";
 import Comment from "../../components/Comment/Comment";
+import { useEffect, useState } from "react";
+import { getPostById } from "../../actions/post";
+import CommentForm from "../../components/CommentForm/CommentForm";
+import AwardAstraCoin from "../../components/AwardAstraCoin/AwardAstraCoin";
 
 const PostView = (props) => {
     document.body.style = "background: #FAFAFA;";
+    const { id } = useParams();
+
+    const [modal, setModal] = useState(false);
+
+    const toggleModal = () => {
+        console.log("toggleModal");
+        setModal(!modal);
+    };
+
+    if (modal) {
+        document.body.classList.add("active-modal");
+    } else {
+        document.body.classList.remove("active-modal");
+    }
+
+    useEffect(() => {
+        props.getPostById(id);
+    }, []);
 
     return (
         <>
@@ -23,32 +45,38 @@ const PostView = (props) => {
                 </div>
                 <div className={classes.postsWrapper}>
                     <div className={classes.postView}>
-                        <PostContent className={classes.postContent} />
+                        {props.post.post && (
+                            <PostContent
+                                className={classes.postContent}
+                                key={props.post.post._id}
+                                post={props.post.post}
+                                showActions={true}
+                                image
+                                toggleModal={toggleModal}
+                            />
+                        )}
                         <hr />
-                        <div className={classes.commentBox}>
-                            <div className={classes.header}>
-                                <Avatar />
-                                <input
-                                    type="text"
-                                    placeholder="Add a public comment..."
-                                />
-                            </div>
-                            <div className={classes.footer}>
-                                <button>COMMENT</button>
-                            </div>
-                        </div>
-                        <hr />
-                        <Comment />
-                        <hr />
-                        <Comment />
-                        <hr />
-                        <Comment />
+                        <CommentForm id={props.post.post?._id} />
+                        {props.post.post?.comments.map((comment) => (
+                            <>
+                                <hr />
+                                <Comment key={comment._id} comment={comment} />
+                            </>
+                        ))}
                     </div>
                 </div>
                 <div className={classes.rightSideWrapper}>
                     {/* insert component here */}
                 </div>
             </div>
+            {modal && (
+                <AwardAstraCoin
+                    key={props.post.post._id}
+                    id={props.post.post._id}
+                    singlePost={true}
+                    toggleModal={toggleModal}
+                />
+            )}
         </>
     );
 };
@@ -60,7 +88,13 @@ PostView.propTypes = {
 const mapStateToProps = (state) => {
     return {
         auth: state.auth,
+        post: state.post,
+        loading: state.post.loading,
     };
 };
 
-export default connect(mapStateToProps, null)(PostView);
+const mapDispatchToProps = {
+    getPostById: getPostById,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostView);

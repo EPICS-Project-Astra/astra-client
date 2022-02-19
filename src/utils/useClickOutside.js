@@ -12,6 +12,7 @@ export default function useClickOutside(
             document.addEventListener(`click`, (evt) => {
                 const cur = menuRef.current;
                 const node = evt.target;
+                if (!cur) return;
                 if (cur.contains(node)) return;
                 setIsOpen(false);
             });

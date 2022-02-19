@@ -3,10 +3,14 @@ import {
     ADD_COMMENT,
     DELETE_COMMENT,
     DELETE_POST,
-    GET_POST,
     GET_POSTS,
     POST_ERROR,
-    UPDATE_LIKES,
+    UPDATE_LIKES_POST,
+    UPDATE_LIKES_POSTS,
+    GET_POST_FETCH,
+    GET_POST_SUCCESS,
+    SEND_COINS_POST,
+    SEND_COINS_POSTS,
 } from "../actions/types";
 
 const initialState = {
@@ -31,7 +35,16 @@ export default function (state = initialState, action) {
                 error: action.payload,
                 loading: false,
             };
-        case UPDATE_LIKES:
+        case UPDATE_LIKES_POST:
+            return {
+                ...state,
+                post:
+                    state.post._id === action.payload.id
+                        ? { ...state.post, likes: action.payload.likes }
+                        : state.post,
+                loading: false,
+            };
+        case UPDATE_LIKES_POSTS:
             return {
                 ...state,
                 posts: state.posts.map((post) =>
@@ -55,11 +68,16 @@ export default function (state = initialState, action) {
                 posts: [action.payload, ...state.posts],
                 loading: false,
             };
-        case GET_POST:
+        case GET_POST_FETCH:
             return {
                 ...state,
-                post: action.payload,
+                loading: true,
+            };
+        case GET_POST_SUCCESS:
+            return {
+                ...state,
                 loading: false,
+                post: action.payload,
             };
         case ADD_COMMENT:
             return {
@@ -79,6 +97,27 @@ export default function (state = initialState, action) {
                         (comment) => comment._id !== action.payload
                     ),
                 },
+                loading: false,
+            };
+        case SEND_COINS_POST:
+            console.log(action.payload);
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    coins: action.payload.coins,
+                },
+                loading: false,
+            };
+        case SEND_COINS_POSTS:
+            // console.log(action.payload);
+            return {
+                ...state,
+                posts: state.posts.map((post) =>
+                    post._id === action.payload._id
+                        ? { ...post, coins: action.payload.coins }
+                        : post
+                ),
                 loading: false,
             };
         default:

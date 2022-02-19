@@ -8,7 +8,8 @@ import Post from "../../components/Post/Post";
 import Sticky from "react-stickynode";
 import PostContent from "../../components/PostContent/PostContent";
 import { getPosts } from "../../actions/post";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import AwardAstraCoin from "../../components/AwardAstraCoin/AwardAstraCoin";
 
 const Dashboard = (props) => {
     document.body.style = "background: #FAFAFA;";
@@ -21,7 +22,21 @@ const Dashboard = (props) => {
         props.getPosts();
     }, []);
 
-    //redirect if not logged in
+    const [modal, setModal] = useState(false);
+
+    const [modalId, setModalId] = useState("");
+    const toggleModal = (id) => {
+        console.log("toggleModal");
+        console.log(id);
+        setModalId(id);
+        setModal(!modal);
+    };
+
+    if (modal) {
+        document.body.classList.add("active-modal");
+    } else {
+        document.body.classList.remove("active-modal");
+    }
 
     return (
         <>
@@ -40,9 +55,18 @@ const Dashboard = (props) => {
                                 post={post}
                                 showActions={true}
                                 image
+                                toggleModal={toggleModal}
                             />
                         </Post>
                     ))}
+                    {modal && (
+                        <AwardAstraCoin
+                            key={modalId}
+                            id={modalId}
+                            singlePost={false}
+                            toggleModal={toggleModal}
+                        />
+                    )}
                 </div>
                 <div className={classes.rightSideWrapper}>
                     {/* insert component here */}
