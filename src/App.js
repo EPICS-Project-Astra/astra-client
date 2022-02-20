@@ -10,6 +10,7 @@ import { loadUser } from "./actions/auth";
 import setAuthToken from "./utils/setAuthToken";
 import PostView from "./pages/PostView/PostView";
 import Astracoin from "./pages/AstraCoin/Astracoin";
+import CreatePost from "./pages/CreatePost/CreatePost";
 
 function App() {
     if (localStorage.token) {
@@ -33,6 +34,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/post/:id" element={<PostView />} />
                 <Route path="/astracoin" element={<Astracoin />} />
+                <Route path="/post/create" element={<CreatePost />} />
             </Routes>
         </BrowserRouter>
     );
