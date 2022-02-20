@@ -8,11 +8,13 @@ import { sendCoins } from "../../actions/post";
 
 const AwardAstraCoin = (props) => {
     const [coins, setCoins] = useState(0);
-    console.log(props.id);
 
-    const handleCoins = (e) => {
+    const handleCoins = async (e) => {
         e.preventDefault();
-        props.sendCoins(props.id, coins, props.singlePost);
+        const error = await props.sendCoins(props.id, coins, props.singlePost);
+        if (!error) {
+            props.toggleModal(props.id);
+        }
     };
 
     return (

@@ -5,15 +5,18 @@ import { ReactComponent as Astra } from "../../assets/icons/rocket.svg";
 import DropDown from "../DropDown/DropDown";
 import DropDownLink from "../DropDownLink/DropDownLink";
 import Avatar from "../Avatar/Avatar";
+import { Link } from "react-router-dom";
 
 const DashboardNavbar = () => {
     return (
         <div className={classes.DashboardNavbar}>
-            <Logo dashboard />
+            <Link to="/dashboard">
+                <Logo dashboard />
+            </Link>
             <div className={classes.rightSide}>
-                <div className={classes.createPost}>
+                <Link to="/post/create" className={classes.createPost}>
                     <Plus size={30} />
-                </div>
+                </Link>
                 <DropDownLink DropDown={<DropDown astracoin />}>
                     <div className={classes.astracoins}>
                         <Astra fill="white" height="26" width="26" />

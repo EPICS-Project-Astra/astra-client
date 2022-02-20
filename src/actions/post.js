@@ -239,7 +239,8 @@ export const sendCoins = (post_id, coins, singlePost) => async (dispatch) => {
             isNaN(coinsNo) ||
             isFloat(coinsNo)
         ) {
-            return dispatch(showAlert("Invalid coins number", "danger"));
+            dispatch(showAlert("Invalid coins number", "danger"));
+            return true; //sending error=true
         }
         const res = await axios.put("/api/posts/" + post_id + "/coins", {
             coins: coinsNo,

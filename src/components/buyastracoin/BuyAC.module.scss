@@ -7,8 +7,8 @@
     height: 500px;
     left: 351px;
     top: 130px;
-    background: #FFFFFF;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    background: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
     border-radius: 5px;
     color: #000000;
 
@@ -20,7 +20,6 @@
         position: absolute;
         width: 683px;
         height: 450px;
-
     }
 
     .title {
@@ -41,7 +40,6 @@
         font-weight: normal;
         font-size: 18px;
         margin: 0px 0px;
-
     }
 
     .stitle {
@@ -81,7 +79,7 @@
         height: 232px;
         left: 26px;
         top: 0px;
-        background: #FFFFFF;
+        background: #ffffff;
         box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
         flex: none;
@@ -139,7 +137,7 @@
         cursor: pointer;
 
         &:hover {
-            filter: brightness(1.2)
+            filter: brightness(1.2);
         }
     }
 
@@ -152,7 +150,7 @@
         font-weight: bold;
         font-size: 14px;
         line-height: 12px;
-        color: #FFFFFF;
+        color: #ffffff;
     }
 
     .curprice {
@@ -168,7 +166,6 @@
         flex: none;
         flex-grow: 0;
         margin: 15px 0px;
-
     }
 
     .astraprice {
@@ -183,8 +180,5 @@
     .ethprice {
         font-style: normal;
         font-weight: normal;
-
     }
-
-
 }

@@ -20,7 +20,6 @@ const PostView = (props) => {
     const [modal, setModal] = useState(false);
 
     const toggleModal = () => {
-        console.log("toggleModal");
         setModal(!modal);
     };
 

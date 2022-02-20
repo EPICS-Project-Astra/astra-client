@@ -1,6 +1,6 @@
 import { LogOut, Settings, User } from "react-feather";
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../../actions/auth";
 import store from "../../store";
 import classes from "./DropDown.module.scss";
@@ -36,7 +36,9 @@ const DropDown = (props) => {
             <span className={classes.balance}>
                 500 {<Astra height={25} width={25} className={classes.icon} />}
             </span>
-            <button className={classes.button}>Buy AstraCoin</button>
+            <Link to="/astracoin" className={classes.link}>
+                <button className={classes.button}>Buy AstraCoin</button>
+            </Link>
         </div>
     ) : (
         <div className={classes.dropdown}>

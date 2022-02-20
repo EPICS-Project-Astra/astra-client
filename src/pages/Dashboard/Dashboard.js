@@ -16,9 +16,9 @@ const Dashboard = (props) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // if (!props.isAuthenticated) {
-        //     return navigate("/login");
-        // }
+        if (!props.isAuthenticated) {
+            return navigate("/login");
+        }
         props.getPosts();
     }, []);
 
@@ -26,8 +26,6 @@ const Dashboard = (props) => {
 
     const [modalId, setModalId] = useState("");
     const toggleModal = (id) => {
-        console.log("toggleModal");
-        console.log(id);
         setModalId(id);
         setModal(!modal);
     };

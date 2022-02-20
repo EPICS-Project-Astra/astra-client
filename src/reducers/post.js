@@ -100,7 +100,6 @@ export default function (state = initialState, action) {
                 loading: false,
             };
         case SEND_COINS_POST:
-            console.log(action.payload);
             return {
                 ...state,
                 post: {
@@ -110,7 +109,6 @@ export default function (state = initialState, action) {
                 loading: false,
             };
         case SEND_COINS_POSTS:
-            // console.log(action.payload);
             return {
                 ...state,
                 posts: state.posts.map((post) =>
