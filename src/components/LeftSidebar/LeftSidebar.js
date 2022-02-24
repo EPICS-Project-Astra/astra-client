@@ -20,7 +20,7 @@ const LeftSidebar = () => {
         </div>
         <div className={classes.module}>
           <div className={classes.heading}>Personal</div>
-          <Link to="#" className={classes.link}>
+          <Link to="/profile" className={classes.link}>
             <User className={classes.icon} />
             <span className={classes.linkText}>Profile</span>
           </Link>

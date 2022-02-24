@@ -1,5 +1,4 @@
 import { Star, Link as LinkIcon } from 'react-feather';
-import { ReactComponent as Rocket } from '../../assets/icons/rocket.svg';
 import classes from './RightSidebar.module.scss';
 import { Link } from 'react-router-dom';
 
