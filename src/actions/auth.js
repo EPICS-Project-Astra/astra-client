@@ -12,6 +12,7 @@ import {
   CLEAR_PROFILE
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
+import { registrationReward } from '../utils/contract-functions';
 
 //load user
 export const loadUser = () => async (dispatch) => {
@@ -38,6 +39,7 @@ export const registerUser = (userData) => async (dispatch) => {
   try {
     const res = await axios.post('/api/users', body, config);
     await dispatch({ type: REGISTER_SUCCESS, payload: res.data });
+    await registrationReward(userData.wallet);
     dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;

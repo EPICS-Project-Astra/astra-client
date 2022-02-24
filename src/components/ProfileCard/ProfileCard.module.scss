@@ -1,0 +1,54 @@
+@use '../../scss/colors';
+
+.body {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 500px;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  position: sticky;
+  top: 100px;
+  align-items: center;
+  z-index: -1;
+
+  .gradient {
+    width: 100%;
+    height: 100px;
+    background-color: colors.$primary-bg;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+
+  .avatarWrapper {
+    margin-top: -45px;
+    margin-bottom: 15px;
+  }
+
+  .username {
+    font-weight: 600;
+    font-size: 22px;
+    margin-bottom: 40px;
+  }
+
+  .module {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    .title {
+      color: colors.$grey;
+    }
+    .content {
+      display: flex;
+      align-items: center;
+      color: colors.$primary;
+      fill: colors.$primary;
+
+      .icon {
+        margin-left: 5px;
+      }
+    }
+  }
+}

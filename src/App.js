@@ -11,6 +11,7 @@ import setAuthToken from './utils/setAuthToken';
 import PostView from './pages/PostView/PostView';
 import Astracoin from './pages/AstraCoin/Astracoin';
 import CreatePost from './pages/CreatePost/CreatePost';
+import Profile from './pages/Profile/Profile';
 
 import { WalletProvider } from './context/WalletContext';
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="/post/:id" element={<PostView />} />
           <Route path="/astracoin" element={<Astracoin />} />
           <Route path="/post/create" element={<CreatePost />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </WalletProvider>

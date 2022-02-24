@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import classes from './Dashboard.module.scss';
+import classes from './Profile.module.scss';
 import DashboardNavbar from '../../components/DashboardNavbar/DashboardNavbar';
 import Post from '../../components/Post/Post';
 import Sticky from 'react-stickynode';
@@ -10,9 +10,9 @@ import { getPosts } from '../../actions/post';
 import { useEffect, useState } from 'react';
 import AwardAstraCoin from '../../components/AwardAstraCoin/AwardAstraCoin';
 import LeftSidebar from '../../components/LeftSidebar/LeftSidebar';
-import RightSidebar from '../../components/RightSidebar/RightSidebar';
+import ProfileCard from '../../components/ProfileCard/ProfileCard';
 
-const Dashboard = (props) => {
+const Profile = (props) => {
   document.body.style = 'background: #FAFAFA;';
   const navigate = useNavigate();
 
@@ -47,17 +47,19 @@ const Dashboard = (props) => {
           <LeftSidebar />
         </div>
         <div className={classes.postsWrapper}>
-          {props.posts.map((post) => (
-            <Post key={post._id}>
-              <PostContent
-                key={post._id}
-                post={post}
-                showActions={true}
-                image
-                toggleModal={toggleModal}
-              />
-            </Post>
-          ))}
+          {props.posts
+            .filter((post) => post.user === props.user._id)
+            .map((post) => (
+              <Post key={post._id}>
+                <PostContent
+                  key={post._id}
+                  post={post}
+                  showActions={true}
+                  image
+                  toggleModal={toggleModal}
+                />
+              </Post>
+            ))}
           {modal && (
             <AwardAstraCoin
               key={modalId}
@@ -68,14 +70,14 @@ const Dashboard = (props) => {
           )}
         </div>
         <div className={classes.rightSideWrapper}>
-          <RightSidebar />
+          <ProfileCard />
         </div>
       </div>
     </>
   );
 };
 
-Dashboard.propTypes = {
+Profile.propTypes = {
   posts: PropTypes.array.isRequired,
   getPosts: PropTypes.func.isRequired
 };
@@ -83,6 +85,7 @@ Dashboard.propTypes = {
 const mapStateToProps = (state) => {
   return {
     posts: state.post.posts,
+    user: state.auth.user,
     isAuthenticated: state.auth.isAuthenticated
   };
 };
@@ -90,4 +93,4 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   getPosts: getPosts
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

@@ -1,12 +1,10 @@
 import PostContent from '../../components/PostContent/PostContent';
-import store from '../../store';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classes from './PostView.module.scss';
 import DashboardNavbar from '../../components/DashboardNavbar/DashboardNavbar';
 import Sticky from 'react-stickynode';
-import Avatar from '../../components/Avatar/Avatar';
 import Comment from '../../components/Comment/Comment';
 import { useEffect, useState } from 'react';
 import { getPostById } from '../../actions/post';

@@ -31,11 +31,13 @@ export const WalletProvider = ({ children }) => {
   const checkIfWalletIsConnected = async (metamask = eth) => {
     try {
       if (!metamask) return alert('Please install metamask');
-      const accounts = await metamask.request({
-        method: 'eth_requestAccounts'
-      });
-      if (accounts.length) {
-        setCurrentAccount(accounts[0]);
+      if (metamask.isConnected()) {
+        const accounts = await metamask.request({
+          method: 'eth_requestAccounts'
+        });
+        if (accounts.length) {
+          setCurrentAccount(accounts[0]);
+        }
       }
     } catch (err) {
       console.error(err);
