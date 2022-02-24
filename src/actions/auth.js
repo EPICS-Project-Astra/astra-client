@@ -39,7 +39,7 @@ export const registerUser = (userData) => async (dispatch) => {
   try {
     const res = await axios.post('/api/users', body, config);
     await dispatch({ type: REGISTER_SUCCESS, payload: res.data });
-    await registrationReward(userData.wallet);
+    // await registrationReward(userData.wallet);
     dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;

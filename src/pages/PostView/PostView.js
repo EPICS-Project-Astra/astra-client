@@ -70,6 +70,7 @@ const PostView = (props) => {
       </div>
       {modal && (
         <AwardAstraCoin
+          post={props.post.post}
           key={props.post.post._id}
           id={props.post.post._id}
           singlePost={true}

@@ -13,15 +13,21 @@ if (typeof window !== undefined) {
 const abi = AstraCoin.abi;
 
 export const transfer = async (account, amount, receiverAddress) => {
-  const provider = new ethers.providers.Web3Provider(ethereum);
-  const signer = provider.getSigner();
-  const astraCoin = new ethers.Contract(contractAddress, abi, signer);
+  try {
+    console.log('im here');
+    console.log(typeof amount);
+    const provider = new ethers.providers.Web3Provider(ethereum);
+    const signer = provider.getSigner();
+    const astraCoin = new ethers.Contract(contractAddress, abi, signer);
 
-  const txAmount = ethers.utils.parseEther(amount);
-  const tx = await astraCoin
-    .connect(account)
-    .transfer(receiverAddress, txAmount);
-  await tx.wait();
+    const txAmount = ethers.utils.parseEther(amount);
+    const tx = await astraCoin.transfer(receiverAddress, txAmount, {
+      from: account
+    });
+    await tx.wait();
+  } catch (err) {
+    console.error('fdf', err);
+  }
 };
 
 export const registrationReward = async (receiverAddress) => {
