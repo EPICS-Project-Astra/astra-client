@@ -28,7 +28,7 @@ const PostContent = (props) => {
       <div className={classes.description}>{props.post.text}</div>
       <div className={classes.image}>
         {props.post.assets.length > 0 && (
-          <img src={props.post.assets[0]} alt="bag" />
+          <img src={props.post.assets[0]} alt="bag" className={classes.img} />
         )}
       </div>
       <div className={classes.interaction}>

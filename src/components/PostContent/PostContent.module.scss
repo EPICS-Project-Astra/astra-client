@@ -1,82 +1,87 @@
-@use "../../scss/colors";
+@use '../../scss/colors';
 
 .title {
-    margin-top: 10px;
-    font-weight: 600;
+  margin-top: 10px;
+  font-weight: 600;
 }
 
 .description {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 
 .image {
-    margin-top: 10px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.img {
+  width: 100%;
 }
 
 .interaction {
+  display: flex;
+  color: colors.$grey;
+  width: 450px;
+  max-width: 470px;
+  justify-content: space-between;
+
+  .liked,
+  .disliked {
     display: flex;
+    align-items: center;
+    cursor: pointer;
+    span {
+      display: flex;
+      align-items: center;
+      margin-left: 8px;
+    }
+  }
+
+  .disliked {
     color: colors.$grey;
-    width: 450px;
-    max-width: 470px;
-    justify-content: space-between;
+    &:hover {
+      color: colors.$pink;
+    }
+  }
 
-    .liked,
-    .disliked {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        span {
-            display: flex;
-            align-items: center;
-            margin-left: 8px;
-        }
+  .liked {
+    color: colors.$pink;
+    &:hover {
+      color: colors.$grey;
+    }
+  }
+
+  .comment {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: colors.$grey;
+    text-decoration: none;
+    span {
+      display: flex;
+      align-items: center;
+      margin-left: 8px;
     }
 
-    .disliked {
-        color: colors.$grey;
-        &:hover {
-            color: colors.$pink;
-        }
+    &:hover {
+      color: colors.$green;
+    }
+  }
+
+  .astracoin {
+    display: flex;
+    fill: colors.$grey;
+    align-items: center;
+    cursor: pointer;
+    span {
+      display: flex;
+      align-items: center;
+      margin-left: 8px;
     }
 
-    .liked {
-        color: colors.$pink;
-        &:hover {
-            color: colors.$grey;
-        }
+    &:hover {
+      color: colors.$primary;
+      fill: colors.$primary;
     }
-
-    .comment {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        color: colors.$grey;
-        text-decoration: none;
-        span {
-            display: flex;
-            align-items: center;
-            margin-left: 8px;
-        }
-
-        &:hover {
-            color: colors.$green;
-        }
-    }
-
-    .astracoin {
-        display: flex;
-        fill: colors.$grey;
-        align-items: center;
-        cursor: pointer;
-        span {
-            display: flex;
-            align-items: center;
-            margin-left: 8px;
-        }
-
-        &:hover {
-            color: colors.$primary;
-            fill: colors.$primary;
-        }
-    }
+  }
 }
