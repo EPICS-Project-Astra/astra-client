@@ -5,8 +5,20 @@ import { logoutUser } from '../../actions/auth';
 import store from '../../store';
 import classes from './DropDown.module.scss';
 import { ReactComponent as Astra } from '../../assets/icons/rocket.svg';
+import { useState, useEffect, useContext } from 'react';
+import { tokenBalance } from '../../utils/contract-functions';
+import { WalletContext } from '../../context/WalletContext';
 
 const DropDown = (props) => {
+  const [balance, setBalance] = useState(0);
+  const { currentAccount } = useContext(WalletContext);
+  useEffect(() => {
+    (async () => {
+      console.log('called');
+      setBalance(await tokenBalance(currentAccount));
+    })();
+  }, [currentAccount]);
+
   const navigate = useNavigate();
   const logOut = () => {
     store.dispatch(logoutUser());
@@ -30,7 +42,7 @@ const DropDown = (props) => {
   return props.astracoin ? (
     <div className={classes.astraDropdown}>
       <span className={classes.balance}>
-        500 {<Astra height={25} width={25} className={classes.icon} />}
+        {balance} {<Astra height={25} width={25} className={classes.icon} />}
       </span>
       <Link to="/astracoin" className={classes.link}>
         <button className={classes.button}>Buy AstraCoin</button>

@@ -60,6 +60,7 @@ const Dashboard = (props) => {
           ))}
           {modal && (
             <AwardAstraCoin
+              post={props.posts.find((post) => post._id === modalId)}
               key={modalId}
               id={modalId}
               singlePost={false}

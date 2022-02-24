@@ -14,6 +14,8 @@ import {
   SEND_COINS_POSTS
 } from './types';
 import { showAlert } from './alert';
+import { ethers } from 'ethers';
+import { transfer } from '../utils/contract-functions';
 
 //get posts
 export const getPosts = () => async (dispatch) => {
@@ -223,34 +225,40 @@ export const deletePost = (post_id) => async (dispatch) => {
   }
 };
 
-export const sendCoins = (post_id, coins, singlePost) => async (dispatch) => {
-  try {
-    const coinsNo = parseInt(coins);
-    function isFloat(n) {
-      return coins.indexOf('.') !== -1 ? true : false;
-    }
-    if (coinsNo < 0 || coinsNo === 0 || isNaN(coinsNo) || isFloat(coinsNo)) {
-      dispatch(showAlert('Invalid coins number', 'danger'));
-      return true; //sending error=true
-    }
-    const res = await axios.put('/api/posts/' + post_id + '/coins', {
-      coins: coinsNo
-    });
-    singlePost
-      ? dispatch({ type: SEND_COINS_POST, payload: res.data })
-      : dispatch({ type: SEND_COINS_POSTS, payload: res.data });
-  } catch (err) {
-    const errors = err.response.data.errors;
+export const sendCoins =
+  (post_id, coins, singlePost, post, currentAccount) => async (dispatch) => {
+    try {
+      const coinsNo = parseInt(coins);
 
-    if (errors) {
-      errors.forEach((error) => dispatch(showAlert(error.msg, 'danger')));
-    }
-    dispatch({
-      type: POST_ERROR,
-      payload: {
-        msg: err.response.statusText,
-        status: err.response.status
+      // console.log(coinsNo);
+      // function isFloat(n) {
+      //   return coins.indexOf('.') !== -1 ? true : false;
+      // }
+      // if (coinsNo < 0 || coinsNo === 0 || isNaN(coinsNo) || isFloat(coinsNo)) {
+      //   dispatch(showAlert('Invalid coins number', 'danger'));
+      //   return true; //sending error=true
+      // }
+
+      await transfer(currentAccount, coins, post.user.wallet);
+      const res = await axios.put('/api/posts/' + post_id + '/coins', {
+        coins: coinsNo
+      });
+
+      singlePost
+        ? dispatch({ type: SEND_COINS_POST, payload: res.data })
+        : dispatch({ type: SEND_COINS_POSTS, payload: res.data });
+    } catch (err) {
+      const errors = err.response.data.errors;
+
+      if (errors) {
+        errors.forEach((error) => dispatch(showAlert(error.msg, 'danger')));
       }
-    });
-  }
-};
+      dispatch({
+        type: POST_ERROR,
+        payload: {
+          msg: err.response.statusText,
+          status: err.response.status
+        }
+      });
+    }
+  };
