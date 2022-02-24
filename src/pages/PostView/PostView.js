@@ -59,7 +59,11 @@ const PostView = (props) => {
             {props.post.post?.comments.map((comment) => (
               <>
                 <hr />
-                <Comment key={comment._id} comment={comment} />
+                <Comment
+                  user={props.post.post.user}
+                  key={comment._id}
+                  comment={comment}
+                />
               </>
             ))}
           </div>
