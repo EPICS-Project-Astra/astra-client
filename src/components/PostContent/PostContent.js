@@ -23,7 +23,7 @@ const PostContent = (props) => {
 
   return (
     <div className={props.className}>
-      <User id={props.post._id} date={props.post.date} />
+      <User id={props.post._id} date={props.post.date} user={props.post.user} />
       <div className={classes.title}>{props.post.title}</div>
       <div className={classes.description}>{props.post.text}</div>
       <div className={classes.image}>
