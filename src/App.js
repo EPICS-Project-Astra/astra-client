@@ -12,6 +12,8 @@ import PostView from './pages/PostView/PostView';
 import Astracoin from './pages/AstraCoin/Astracoin';
 import CreatePost from './pages/CreatePost/CreatePost';
 
+import { WalletProvider } from './context/WalletContext';
+
 function App() {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
@@ -26,17 +28,19 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/post/:id" element={<PostView />} />
-        <Route path="/astracoin" element={<Astracoin />} />
-        <Route path="/post/create" element={<CreatePost />} />
-      </Routes>
-    </BrowserRouter>
+    <WalletProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/post/:id" element={<PostView />} />
+          <Route path="/astracoin" element={<Astracoin />} />
+          <Route path="/post/create" element={<CreatePost />} />
+        </Routes>
+      </BrowserRouter>
+    </WalletProvider>
   );
 }
 
