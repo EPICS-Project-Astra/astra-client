@@ -1,4 +1,4 @@
-import axios from "../utils/axiosInstance";
+import axios from '../utils/axiosInstance';
 import {
   GET_POSTS,
   POST_ERROR,
@@ -11,86 +11,86 @@ import {
   GET_POST_FETCH,
   GET_POST_SUCCESS,
   SEND_COINS_POST,
-  SEND_COINS_POSTS,
-} from "./types";
-import { showAlert } from "./alert";
+  SEND_COINS_POSTS
+} from './types';
+import { showAlert } from './alert';
 
 //get posts
 export const getPosts = () => async (dispatch) => {
   try {
-    const res = await axios.get("/api/posts");
+    const res = await axios.get('/api/posts');
     dispatch({ type: GET_POSTS, payload: res.data });
   } catch (err) {
     dispatch({
       type: POST_ERROR,
       payload: {
         msg: err.response.statusText,
-        status: err.response.status,
-      },
+        status: err.response.status
+      }
     });
   }
 };
 
 //like post
 export const likePost =
-  (post_id, type = "multiple") =>
+  (post_id, type = 'multiple') =>
   async (dispatch) => {
     try {
       const res = await axios.put(`/api/posts/${post_id}/likes`);
-      type === "multiple"
+      type === 'multiple'
         ? dispatch({
             type: UPDATE_LIKES_POSTS,
-            payload: { id: post_id, likes: res.data },
+            payload: { id: post_id, likes: res.data }
           })
         : dispatch({
             type: UPDATE_LIKES_POST,
-            payload: { id: post_id, likes: res.data },
+            payload: { id: post_id, likes: res.data }
           });
     } catch (err) {
       const errors = err.response.data.errors;
 
       if (errors) {
-        errors.forEach((error) => dispatch(showAlert(error.msg, "danger")));
+        errors.forEach((error) => dispatch(showAlert(error.msg, 'danger')));
       }
 
       dispatch({
         type: POST_ERROR,
         payload: {
           msg: err.response.statusText,
-          status: err.response.status,
-        },
+          status: err.response.status
+        }
       });
     }
   };
 
 //unlike post
 export const unlikePost =
-  (post_id, type = "multiple") =>
+  (post_id, type = 'multiple') =>
   async (dispatch) => {
     try {
       const res = await axios.put(`/api/posts/${post_id}/unlike`);
-      type === "multiple"
+      type === 'multiple'
         ? dispatch({
             type: UPDATE_LIKES_POSTS,
-            payload: { id: post_id, likes: res.data },
+            payload: { id: post_id, likes: res.data }
           })
         : dispatch({
             type: UPDATE_LIKES_POST,
-            payload: { id: post_id, likes: res.data },
+            payload: { id: post_id, likes: res.data }
           });
     } catch (err) {
       const errors = err.response.data.errors;
 
       if (errors) {
-        errors.forEach((error) => dispatch(showAlert(error.msg, "danger")));
+        errors.forEach((error) => dispatch(showAlert(error.msg, 'danger')));
       }
 
       dispatch({
         type: POST_ERROR,
         payload: {
           msg: err.response.statusText,
-          status: err.response.status,
-        },
+          status: err.response.status
+        }
       });
     }
   };
@@ -98,28 +98,28 @@ export const unlikePost =
 export const addPost = (formData) => async (dispatch) => {
   const config = {
     headers: {
-      "Content-Type": "application/json",
-    },
+      'Content-Type': 'application/json'
+    }
   };
 
   const body = JSON.stringify(formData);
   try {
-    const res = await axios.post("/api/posts", body, config);
+    const res = await axios.post('/api/posts', body, config);
     dispatch({ type: ADD_POST, payload: res.data });
-    dispatch(showAlert("Post added.", "success"));
+    dispatch(showAlert('Post added.', 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach((error) => dispatch(showAlert(error.msg, "danger")));
+      errors.forEach((error) => dispatch(showAlert(error.msg, 'danger')));
     }
 
     dispatch({
       type: POST_ERROR,
       payload: {
         msg: err.response.statusText,
-        status: err.response.status,
-      },
+        status: err.response.status
+      }
     });
   }
 };
@@ -135,8 +135,8 @@ export const getPostById = (post_id) => async (dispatch) => {
       type: POST_ERROR,
       payload: {
         msg: err.response.statusText,
-        status: err.response.status,
-      },
+        status: err.response.status
+      }
     });
   }
 };
@@ -145,8 +145,8 @@ export const getPostById = (post_id) => async (dispatch) => {
 export const addComment = (post_id, formData) => async (dispatch) => {
   const config = {
     headers: {
-      "Content-Type": "application/json",
-    },
+      'Content-Type': 'application/json'
+    }
   };
 
   const body = JSON.stringify(formData);
@@ -157,20 +157,20 @@ export const addComment = (post_id, formData) => async (dispatch) => {
       config
     );
     dispatch({ type: ADD_COMMENT, payload: res.data });
-    dispatch(showAlert("Comment added.", "success"));
+    dispatch(showAlert('Comment added.', 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach((error) => dispatch(showAlert(error.msg, "danger")));
+      errors.forEach((error) => dispatch(showAlert(error.msg, 'danger')));
     }
 
     dispatch({
       type: POST_ERROR,
       payload: {
         msg: err.response.statusText,
-        status: err.response.status,
-      },
+        status: err.response.status
+      }
     });
   }
 };
@@ -182,20 +182,20 @@ export const deleteComment = (post_id, comment_id) => async (dispatch) => {
       `/api/posts/${post_id}/comments/${comment_id}`
     );
     dispatch({ type: DELETE_COMMENT, payload: comment_id });
-    dispatch(showAlert("Comment removed.", "success"));
+    dispatch(showAlert('Comment removed.', 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach((error) => dispatch(showAlert(error.msg, "danger")));
+      errors.forEach((error) => dispatch(showAlert(error.msg, 'danger')));
     }
 
     dispatch({
       type: POST_ERROR,
       payload: {
         msg: err.response.statusText,
-        status: err.response.status,
-      },
+        status: err.response.status
+      }
     });
   }
 };
@@ -205,20 +205,20 @@ export const deletePost = (post_id) => async (dispatch) => {
   try {
     const res = await axios.delete(`/api/posts/${post_id}`);
     dispatch({ type: DELETE_POST, payload: { id: post_id } });
-    dispatch(showAlert("Post removed.", "success"));
+    dispatch(showAlert('Post removed.', 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach((error) => dispatch(showAlert(error.msg, "danger")));
+      errors.forEach((error) => dispatch(showAlert(error.msg, 'danger')));
     }
 
     dispatch({
       type: POST_ERROR,
       payload: {
         msg: err.response.statusText,
-        status: err.response.status,
-      },
+        status: err.response.status
+      }
     });
   }
 };
@@ -227,14 +227,14 @@ export const sendCoins = (post_id, coins, singlePost) => async (dispatch) => {
   try {
     const coinsNo = parseInt(coins);
     function isFloat(n) {
-      return coins.indexOf(".") !== -1 ? true : false;
+      return coins.indexOf('.') !== -1 ? true : false;
     }
     if (coinsNo < 0 || coinsNo === 0 || isNaN(coinsNo) || isFloat(coinsNo)) {
-      dispatch(showAlert("Invalid coins number", "danger"));
+      dispatch(showAlert('Invalid coins number', 'danger'));
       return true; //sending error=true
     }
-    const res = await axios.put("/api/posts/" + post_id + "/coins", {
-      coins: coinsNo,
+    const res = await axios.put('/api/posts/' + post_id + '/coins', {
+      coins: coinsNo
     });
     singlePost
       ? dispatch({ type: SEND_COINS_POST, payload: res.data })
@@ -243,14 +243,14 @@ export const sendCoins = (post_id, coins, singlePost) => async (dispatch) => {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach((error) => dispatch(showAlert(error.msg, "danger")));
+      errors.forEach((error) => dispatch(showAlert(error.msg, 'danger')));
     }
     dispatch({
       type: POST_ERROR,
       payload: {
         msg: err.response.statusText,
-        status: err.response.status,
-      },
+        status: err.response.status
+      }
     });
   }
 };
