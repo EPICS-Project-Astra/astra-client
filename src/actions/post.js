@@ -11,7 +11,8 @@ import {
   GET_POST_FETCH,
   GET_POST_SUCCESS,
   SEND_COINS_POST,
-  SEND_COINS_POSTS
+  SEND_COINS_POSTS,
+  CLEAR_POST
 } from './types';
 import { showAlert } from './alert';
 import { ethers } from 'ethers';
@@ -262,3 +263,10 @@ export const sendCoins =
       });
     }
   };
+
+export const clearPost = (post_id) => async (dispatch) => {
+  try {
+    dispatch({ type: CLEAR_POST });
+    // dispatch(showAlert('Post removed.', 'success'));
+  } catch (err) {}
+};

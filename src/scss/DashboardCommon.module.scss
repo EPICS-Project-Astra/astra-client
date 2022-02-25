@@ -1,12 +1,14 @@
-@use "../../scss/colors";
+@use './colors';
 
 .dashboard {
     display: flex;
-    // height: calc(100vh - 65px);
+    // height: 100%;
+    padding-top: 35px;
 
     .sidebarWrapper {
         display: flex;
         flex: 2;
+        // height: 100%;
         // border: 1px solid black;
     }
 
@@ -17,7 +19,8 @@
         // border: 1px solid black;
         // justify-content: center;
         align-items: center;
-        padding-top: 10px;
+        // padding-top: 35px;
+        height: max-content;
 
         .postView {
             display: flex;
@@ -43,8 +46,6 @@
                 border: none;
                 margin: 0;
             }
-
-            
         }
     }
 

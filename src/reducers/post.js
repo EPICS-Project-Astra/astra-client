@@ -11,13 +11,14 @@ import {
     GET_POST_SUCCESS,
     SEND_COINS_POST,
     SEND_COINS_POSTS,
-} from "../actions/types";
+    CLEAR_POST
+} from '../actions/types';
 
 const initialState = {
     posts: [],
     post: null,
     loading: true,
-    error: {},
+    error: {}
 };
 
 //eslint-disable-next-line
@@ -27,13 +28,13 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 posts: action.payload,
-                loading: false,
+                loading: false
             };
         case POST_ERROR:
             return {
                 ...state,
                 error: action.payload,
-                loading: false,
+                loading: false
             };
         case UPDATE_LIKES_POST:
             return {
@@ -42,7 +43,7 @@ export default function (state = initialState, action) {
                     state.post._id === action.payload.id
                         ? { ...state.post, likes: action.payload.likes }
                         : state.post,
-                loading: false,
+                loading: false
             };
         case UPDATE_LIKES_POSTS:
             return {
@@ -52,7 +53,7 @@ export default function (state = initialState, action) {
                         ? { ...post, likes: action.payload.likes }
                         : post
                 ),
-                loading: false,
+                loading: false
             };
         case DELETE_POST:
             return {
@@ -60,33 +61,33 @@ export default function (state = initialState, action) {
                 posts: state.posts.filter(
                     (post) => post._id !== action.payload.id
                 ),
-                loading: false,
+                loading: false
             };
         case ADD_POST:
             return {
                 ...state,
                 posts: [action.payload, ...state.posts],
-                loading: false,
+                loading: false
             };
         case GET_POST_FETCH:
             return {
                 ...state,
-                loading: true,
+                loading: true
             };
         case GET_POST_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                post: action.payload,
+                post: action.payload
             };
         case ADD_COMMENT:
             return {
                 ...state,
                 post: {
                     ...state.post,
-                    comments: action.payload,
+                    comments: action.payload
                 },
-                loading: false,
+                loading: false
             };
         case DELETE_COMMENT:
             return {
@@ -95,18 +96,18 @@ export default function (state = initialState, action) {
                     ...state.post,
                     comments: state.post.comments.filter(
                         (comment) => comment._id !== action.payload
-                    ),
+                    )
                 },
-                loading: false,
+                loading: false
             };
         case SEND_COINS_POST:
             return {
                 ...state,
                 post: {
                     ...state.post,
-                    coins: action.payload.coins,
+                    coins: action.payload.coins
                 },
-                loading: false,
+                loading: false
             };
         case SEND_COINS_POSTS:
             return {
@@ -116,7 +117,12 @@ export default function (state = initialState, action) {
                         ? { ...post, coins: action.payload.coins }
                         : post
                 ),
-                loading: false,
+                loading: false
+            };
+        case CLEAR_POST:
+            return {
+                ...state,
+                post: null
             };
         default:
             return state;
