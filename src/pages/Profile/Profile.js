@@ -48,7 +48,7 @@ const Profile = (props) => {
         </div>
         <div className={classes.postsWrapper}>
           {props.posts
-            .filter((post) => post.user === props.user._id)
+            .filter((post) => post.user._id === props.user._id)
             .map((post) => (
               <Post key={post._id}>
                 <PostContent
