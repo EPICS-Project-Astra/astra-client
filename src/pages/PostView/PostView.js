@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import Sticky from 'react-stickynode';
+
 import { clearPost, getPostById } from '../../actions/post';
 import AwardAstraCoin from '../../components/AwardAstraCoin/AwardAstraCoin';
 import Comment from '../../components/Comment/Comment';
@@ -39,9 +39,7 @@ const PostView = (props) => {
 
 	return (
 		<>
-			<Sticky>
-				<DashboardNavbar />
-			</Sticky>
+			<DashboardNavbar />
 			<div className={classes.dashboard}>
 				<div className={classes.sidebarWrapper}>
 					<LeftSidebar />

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Sticky from 'react-stickynode';
+
 import { getPosts } from '../../actions/post';
 import AwardAstraCoin from '../../components/AwardAstraCoin/AwardAstraCoin';
 import DashboardNavbar from '../../components/DashboardNavbar/DashboardNavbar';
@@ -39,9 +39,7 @@ const Profile = (props) => {
 
 	return (
 		<>
-			<Sticky>
-				<DashboardNavbar />
-			</Sticky>
+			<DashboardNavbar />
 			<div className={classes.dashboard}>
 				<div className={classes.sidebarWrapper}>
 					<LeftSidebar />

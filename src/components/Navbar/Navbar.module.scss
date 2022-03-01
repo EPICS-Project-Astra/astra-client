@@ -1,47 +1,56 @@
 @use '../../scss/colors';
 
 .navBar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0px 250px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0px 250px;
 
-  .rightSide {
-    display: flex;
-    justify-content: space-between;
+	.rightSide {
+		display: flex;
+		justify-content: space-between;
 
-    .login,
-    .register {
-      display: flex;
-      align-items: center;
-      padding: 11px 20px;
-      font-size: 16px;
-      font-weight: 900;
-      border-radius: 2px;
-      border: none;
-      cursor: pointer;
-    }
+		.login,
+		.register,
+		.connect {
+			display: flex;
+			align-items: center;
+			padding: 11px 20px;
+			font-size: 16px;
+			font-weight: 900;
+			border-radius: 2px;
+			border: none;
+			cursor: pointer;
+		}
 
-    .login {
-      margin: 0 20px;
-      background: #fff;
-      color: black;
-      text-decoration: none;
-      &:hover {
-        background: rgb(224, 214, 214);
-      }
-    }
+		.login,
+		.connect {
+			background: #fff;
+			color: black;
+			text-decoration: none;
+			&:hover {
+				background: rgb(224, 214, 214);
+			}
+		}
 
-    .register {
-      background: colors.$primary;
-      color: white;
-      text-decoration: none;
-      &:hover {
-        background: #d36c18;
-      }
-      .userPlusLogo {
-        margin-right: 5px;
-      }
-    }
-  }
+		.login {
+			margin: 0 20px;
+		}
+
+		.connect {
+			margin-left: 20px;
+		}
+
+		.register {
+			background: colors.$primary;
+			color: white;
+			text-decoration: none;
+			&:hover {
+				background: #d36c18;
+			}
+			.userPlusLogo {
+				margin-right: 5px;
+			}
+		}
+	}
 }

@@ -1,5 +1,3 @@
-// import classes from './Astracoin.module.scss';
-import Sticky from 'react-stickynode';
 import BuyACCon from '../../components/BuyAstraCoin/BuyAstraCoin.js';
 import DashboardNavbar from '../../components/DashboardNavbar/DashboardNavbar';
 import LeftSidebar from '../../components/LeftSidebar/LeftSidebar';
@@ -9,9 +7,7 @@ import classes from '../../scss/DashboardCommon.module.scss';
 const Astracoin = () => {
 	return (
 		<>
-			<Sticky>
-				<DashboardNavbar />
-			</Sticky>
+			<DashboardNavbar />
 			<div className={classes.dashboard}>
 				<div className={classes.sidebarWrapper}>
 					<LeftSidebar />

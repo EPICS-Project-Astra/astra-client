@@ -20,12 +20,12 @@ const Navbar = () => {
 					Register
 				</Link>
 				{currentAccount ? (
-					<div className={classes.login}>
+					<div className={classes.connect}>
 						{currentAccount.slice(0, 7)}
 					</div>
 				) : (
 					<div
-						className={classes.login}
+						className={classes.connect}
 						onClick={() => connectWallet()}
 					>
 						Connect Wallet

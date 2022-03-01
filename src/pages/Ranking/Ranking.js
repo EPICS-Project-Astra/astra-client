@@ -12,7 +12,7 @@ import PostContent from '../../components/PostContent/PostContent';
 import RightSidebar from '../../components/RightSidebar/RightSidebar';
 import classes from '../../scss/DashboardCommon.module.scss';
 
-const Dashboard = (props) => {
+const Ranking = (props) => {
 	document.body.style = 'background: #FAFAFA;';
 	const navigate = useNavigate();
 
@@ -45,17 +45,21 @@ const Dashboard = (props) => {
 					<LeftSidebar />
 				</div>
 				<div className={classes.postsWrapper}>
-					{props.posts.map((post) => (
-						<Post key={post._id}>
-							<PostContent
-								key={post._id}
-								post={post}
-								showActions={true}
-								image
-								toggleModal={toggleModal}
-							/>
-						</Post>
-					))}
+					{props.posts
+						.sort((post1, post2) =>
+							post1.likes.length < post2.likes.length ? 1 : -1
+						)
+						.map((post) => (
+							<Post key={post._id}>
+								<PostContent
+									key={post._id}
+									post={post}
+									showActions={true}
+									image
+									toggleModal={toggleModal}
+								/>
+							</Post>
+						))}
 					{modal && (
 						<AwardAstraCoin
 							post={props.posts.find(
@@ -76,7 +80,7 @@ const Dashboard = (props) => {
 	);
 };
 
-Dashboard.propTypes = {
+Ranking.propTypes = {
 	posts: PropTypes.array.isRequired,
 	getPosts: PropTypes.func.isRequired
 };
@@ -91,4 +95,4 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
 	getPosts: getPosts
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Ranking);

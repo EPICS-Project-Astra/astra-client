@@ -20,17 +20,17 @@ const BuyAstraCoin = () => {
 							<div className={classes.recom}></div>
 							<div className={classes.packtitle}>Stack</div>
 							<div className={classes.curprice}>
-								<p1 className={classes.astraprice}>
+								<div className={classes.astraprice}>
 									300
 									<Rocket width={20} height={20} />{' '}
-								</p1>
-								<p1 className={classes.ethprice}>
+								</div>
+								<div className={classes.ethprice}>
 									for 0.0002 ETH
-								</p1>
+								</div>
 							</div>
-							<p1 className={classes.probutton}>
-								<p1 className={classes.proceed}>PROCEED</p1>
-							</p1>
+							<div className={classes.probutton}>
+								<div className={classes.proceed}>PROCEED</div>
+							</div>
 						</div>
 					</div>
 					<div className={classes.pricecard}>
@@ -38,17 +38,17 @@ const BuyAstraCoin = () => {
 							<div className={classes.recom}>RECOMMENDED</div>
 							<div className={classes.packtitle}>Box</div>
 							<div className={classes.curprice}>
-								<p1 className={classes.astraprice}>
+								<div className={classes.astraprice}>
 									300
 									<Rocket width={20} height={20} />{' '}
-								</p1>
-								<p1 className={classes.ethprice}>
+								</div>
+								<div className={classes.ethprice}>
 									for 0.0002 ETH
-								</p1>
+								</div>
 							</div>
-							<p1 className={classes.probutton}>
-								<p1 className={classes.proceed}>PROCEED</p1>
-							</p1>
+							<div className={classes.probutton}>
+								<div className={classes.proceed}>PROCEED</div>
+							</div>
 						</div>
 					</div>
 					<div className={classes.pricecard}>
@@ -56,17 +56,17 @@ const BuyAstraCoin = () => {
 							<div className={classes.recom}></div>
 							<div className={classes.packtitle}>Vault</div>
 							<div className={classes.curprice}>
-								<p1 className={classes.astraprice}>
+								<div className={classes.astraprice}>
 									300
 									<Rocket width={20} height={20} />
-								</p1>
-								<p1 className={classes.ethprice}>
+								</div>
+								<div className={classes.ethprice}>
 									for 0.0002 ETH
-								</p1>
+								</div>
 							</div>
-							<p1 className={classes.probutton}>
-								<p1 className={classes.proceed}>PROCEED</p1>
-							</p1>
+							<div className={classes.probutton}>
+								<div className={classes.proceed}>PROCEED</div>
+							</div>
 						</div>
 					</div>
 				</div>
